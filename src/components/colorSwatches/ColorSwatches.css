@@ -2,6 +2,7 @@
     display: flex;
     gap: 15px;
     padding-block: 10px;
+    flex-wrap: wrap;
 }
 
 .color-opt{
@@ -10,5 +11,15 @@
     padding: 10px;
     border: 1px solid white;
     border-radius: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
     cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+.color-opt:hover {
+    transform: scale(1.05);
 }
