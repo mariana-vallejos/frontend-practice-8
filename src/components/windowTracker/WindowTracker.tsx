@@ -1,24 +1,38 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 
 type Size = {
-    width: number
-    height: number
-}
+  width: number;
+  height: number;
+};
 
 const WindowTracker = () => {
-    const [sizeWindow, setSizeWindow] = useState<Size>()
+  const [sizeWindow, setSizeWindow] = useState<Size>({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
 
-    useEffect(() => {
+  const handleResize = () => {
+    setSizeWindow({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+  };
 
-    }, [])
-    
-    return (
-        <section>
-            <h2>Current size window</h2>
-            <p>Current width: {sizeWindow?.width}</p>
-            <p>Current width: {sizeWindow?.height}</p>
-        </section>
-    )
-}
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
 
-export default WindowTracker
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  return (
+    <section>
+      <h2>Current size window</h2>
+      <p>Current width: {sizeWindow?.width} px</p>
+      <p>Current width: {sizeWindow?.height} px</p>
+    </section>
+  );
+};
+
+export default WindowTracker;
